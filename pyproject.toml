@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "shavtsak-drf"
+version = "0.1.0"
+description = ""
+authors = ["YonchRibak <109977685+YonchRibak@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "shavtsak_drf"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.1.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

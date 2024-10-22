@@ -14,10 +14,12 @@ class EntityView(APIView):
             raise PermissionDenied("Only entity initializers can create entities.")
 
         name = request.data.get('name')
+        description = request.data.get('description')
 
-        # Create the entity with the logged-in superuser as the creator
+        # Create the entity with the logged-in user as the creator
         entity = Entity.objects.create(
             name=name,
+            description=description,
             creator=request.user
         )
 

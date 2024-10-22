@@ -9,7 +9,15 @@ packages = [{include = "shavtsak_drf"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^5.1.2"
+djangorestframework = "^3.15.2"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-django = "^4.9.0"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "shavtzak_drf.settings"
+python_files = ["test_*.py", "*_test.py", "tests.py"]
 
 [build-system]
 requires = ["poetry-core"]

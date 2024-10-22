@@ -9,7 +9,7 @@ class AddUserSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
     entity_id = serializers.IntegerField()
-    entity_code = serializers.CharField(length=6)
+    entity_code = serializers.CharField(max_length=6)
     user_type = serializers.ChoiceField(choices=[UserType.REGULAR_USER.value, UserType.SHAVTZAK_MANAGER.value])
     
     def validate(self, data):

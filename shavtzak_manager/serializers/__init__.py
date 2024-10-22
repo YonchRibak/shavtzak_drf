@@ -1,2 +1,3 @@
 from .add_entity_initializer_serializer import AddEntityInitializerSerializer
 from .add_user_serializer import AddUserSerializer
+from .login_serializer import LoginSerializer

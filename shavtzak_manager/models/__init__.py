@@ -1,2 +1,3 @@
 from .entity_model import Entity
 from .user_system_custom_fields_model import UserSystemCustomFields, UserType
+from .entity_user_custom_field_definition import EntityUserCustomFieldDefinition

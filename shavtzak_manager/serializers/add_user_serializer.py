@@ -27,11 +27,12 @@ class AddUserSerializer(serializers.Serializer):
         except Entity.DoesNotExist:
             raise serializers.ValidationError('Entity does not exist.')
 
-        # Validate user_type
-        if user_type not in [UserTypeChoices.REGULAR_USER.value, UserTypeChoices.SHAVTZAK_MANAGER.value]:
+        return data
+
+    def validate_user_type(self, value):
+        if value not in [UserTypeChoices.REGULAR_USER.value, UserTypeChoices.SHAVTZAK_MANAGER.value]:
             raise serializers.ValidationError('Invalid user type.')
 
-        return data
 
     def create(self, validated_data):
         username = validated_data['username']

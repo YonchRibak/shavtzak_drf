@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -10,12 +9,13 @@ class UserTypeChoices(models.TextChoices):
 
 class UserSystemCustomFields(models.Model):
     
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_system_custom_fields')
+    user = models.OneToOneField("auth.User", on_delete=models.CASCADE, related_name='user_system_custom_fields', verbose_name="משתמש")
     
     user_type = models.CharField(
         max_length=30,
         choices=UserTypeChoices,
-        default=UserTypeChoices.REGULAR_USER.value
+        default=UserTypeChoices.REGULAR_USER.value,
+        verbose_name="סוג משתמש"
     )
 
     def __str__(self):

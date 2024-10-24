@@ -30,7 +30,7 @@ class AddUserSerializer(serializers.Serializer):
         return data
 
     def validate_user_type(self, value):
-        if value not in [UserTypeChoices.REGULAR_USER.value, UserTypeChoices.SHAVTZAK_MANAGER.value]:
+        if value not in UserTypeChoices.allowed_users_for_something:
             raise serializers.ValidationError('Invalid user type.')
 
 

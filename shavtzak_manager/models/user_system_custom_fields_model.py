@@ -6,6 +6,9 @@ class UserTypeChoices(models.TextChoices):
     SHAVTZAK_MANAGER = 'shavtzak_manager'
     REGULAR_USER = 'regular_user'
 
+    @property
+    def allowed_users_for_something(self):
+        return [self.REGULAR_USER.value, self.SHAVTZAK_MANAGER.value]
 
 class UserSystemCustomFields(models.Model):
     

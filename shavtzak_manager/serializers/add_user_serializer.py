@@ -35,17 +35,12 @@ class AddUserSerializer(serializers.Serializer):
 
 
     def create(self, validated_data):
-        username = validated_data['username']
-        email = validated_data['email']
-        password = validated_data['password']
-        entity = validated_data['entity']
-        user_type = validated_data['user_type']
+        entity = validated_data.pop('entity', None)
+        user_type = validated_data.pop("user_type", None)
 
         # Create the user
         user = User.objects.create_user(
-            username=username,
-            email=email,
-            password=password
+            **validated_data
         )
 
         # Add user to the entity's group

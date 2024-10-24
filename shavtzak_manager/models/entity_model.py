@@ -10,7 +10,7 @@ class Entity(models.Model):
         verbose_name = "ישות"
         verbose_name_plural = "ישויות"
 
-    name = models.CharField(max_length=20, verbose_name="שם")
+    name = models.CharField(max_length=20, verbose_name="שם", unique=True)
     code = models.CharField(max_length=6, unique=True, null=True, editable=False,
                             verbose_name="קוד")  # Auto-generated unique code, not editable
     description = models.CharField(max_length=300, null=True, verbose_name="תיאור")

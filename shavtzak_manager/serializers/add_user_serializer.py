@@ -8,6 +8,7 @@ class AddUserSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
+    entity = serializers.PrimaryKeyRelatedField(queryset=Entity.objects.all())
     entity_id = serializers.IntegerField()
     entity_code = serializers.CharField(max_length=6)
     user_type = serializers.ChoiceField(choices=[UserTypeChoices.REGULAR_USER.value, UserTypeChoices.SHAVTZAK_MANAGER.value])

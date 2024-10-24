@@ -29,8 +29,8 @@ class AddEntityInitializerViewTests(APITestCase):
         self.assertIn('email', response.data)
         
         # Check if the user exists in the database
-        user = User.objects.get(username='testuser')
-        self.assertEqual(user.email, 'testuser@example.com')
+        user = User.objects.get(username=self.valid_data.get("username"))
+        self.assertEqual(user.email, self.valid_data.get("email"))
 
         # Check if the user is set as an entity initializer
         custom_fields = UserSystemCustomFields.objects.get(user=user)
@@ -42,3 +42,6 @@ class AddEntityInitializerViewTests(APITestCase):
         self.assertIn('username', response.data)
         self.assertIn('email', response.data)
         self.assertIn('password', response.data)
+
+        user = User.objects.filter(username=self.invalid_data.get("username"))
+        self.assertFalse(user.exists())

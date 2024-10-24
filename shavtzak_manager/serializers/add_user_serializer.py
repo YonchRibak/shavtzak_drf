@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from ..models import UserSystemCustomFields, UserType, Entity
+from ..models import UserSystemCustomFields, UserTypeChoices, Entity
 
 
 # Serializer for adding users and adding them to an existing entity
@@ -10,7 +10,7 @@ class AddUserSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True)
     entity_id = serializers.IntegerField()
     entity_code = serializers.CharField(max_length=6)
-    user_type = serializers.ChoiceField(choices=[UserType.REGULAR_USER.value, UserType.SHAVTZAK_MANAGER.value])
+    user_type = serializers.ChoiceField(choices=[UserTypeChoices.REGULAR_USER.value, UserTypeChoices.SHAVTZAK_MANAGER.value])
     
     def validate(self, data):
         entity_id = data.get('entity_id')
@@ -27,7 +27,7 @@ class AddUserSerializer(serializers.Serializer):
             raise serializers.ValidationError('Entity does not exist.')
 
         # Validate user_type
-        if user_type not in [UserType.REGULAR_USER.value, UserType.SHAVTZAK_MANAGER.value]:
+        if user_type not in [UserTypeChoices.REGULAR_USER.value, UserTypeChoices.SHAVTZAK_MANAGER.value]:
             raise serializers.ValidationError('Invalid user type.')
 
         return data

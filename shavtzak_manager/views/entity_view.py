@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from ..models import UserType
+from ..models import UserTypeChoices
 from django.core.exceptions import PermissionDenied
 from ..serializers import EntitySerializer
 
@@ -11,7 +11,7 @@ class EntityView(APIView):
 
     def post(self, request):
         # Check if the user has the appropriate type to create an entity
-        if request.user.user_system_custom_fields.user_type != UserType.ENTITY_INITIALIZER.value:
+        if request.user.user_system_custom_fields.user_type != UserTypeChoices.ENTITY_INITIALIZER.value:
             raise PermissionDenied("Only entity initializers can create entities.")
 
         # Use the serializer for validation and creation

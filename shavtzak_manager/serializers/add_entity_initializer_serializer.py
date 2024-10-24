@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Group
-from ..models import UserSystemCustomFields, UserType, Entity
+from ..models import UserSystemCustomFields, UserTypeChoices, Entity
 
 # Serializer for adding a user as an entity initializer without an entity
 class AddEntityInitializerSerializer(serializers.Serializer):
@@ -29,7 +29,7 @@ class AddEntityInitializerSerializer(serializers.Serializer):
         # Create the UserSystemCustomFields instance as an entity initializer
         UserSystemCustomFields.objects.create(
             user=user,
-            user_type=UserType.ENTITY_INITIALIZER.value,
+            user_type=UserTypeChoices.ENTITY_INITIALIZER.value,
         )
 
         return user

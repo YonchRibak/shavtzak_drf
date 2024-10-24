@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from ..models import UserSystemCustomFields, UserType
+from ..models import UserSystemCustomFields, UserTypeChoices
 
 class AddEntityInitializerViewTests(APITestCase):
 
@@ -29,12 +29,12 @@ class AddEntityInitializerViewTests(APITestCase):
         self.assertIn('email', response.data)
         
         # Check if the user exists in the database
-        user = User.objects.get(username='testuser')
-        self.assertEqual(user.email, 'testuser@example.com')
+        user = User.objects.get(username=self.valid_data.get("username"))
+        self.assertEqual(user.email, self.valid_data.get("email"))
 
         # Check if the user is set as an entity initializer
         custom_fields = UserSystemCustomFields.objects.get(user=user)
-        self.assertEqual(custom_fields.user_type, UserType.ENTITY_INITIALIZER.value)
+        self.assertEqual(custom_fields.user_type, UserTypeChoices.ENTITY_INITIALIZER.value)
 
     def test_create_entity_initializer_invalid_data(self):
         response = self.client.post(self.url, self.invalid_data, format='json')
@@ -42,3 +42,6 @@ class AddEntityInitializerViewTests(APITestCase):
         self.assertIn('username', response.data)
         self.assertIn('email', response.data)
         self.assertIn('password', response.data)
+
+        user = User.objects.filter(username=self.invalid_data.get("username"))
+        self.assertFalse(user.exists())
